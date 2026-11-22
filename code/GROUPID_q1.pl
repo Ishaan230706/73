@@ -80,3 +80,9 @@ clue(8, Solution) :-
 solution(Active, Solution) :-
     candidate(Solution),
     forall(member(N, Active), clue(N, Solution)).
+
+% print_person(+Person)
+%   Declarative reading: always true of a p/4 term. As its only effect it
+%   writes that term as the line "Name = [Dept, Lang, Project]".
+print_person(p(Name, Dept, Lang, Project)) :-
+    format("~w = [~w, ~w, ~w]~n", [Name, Dept, Lang, Project]).
