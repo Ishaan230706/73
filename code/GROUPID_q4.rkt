@@ -44,14 +44,10 @@
     insert))
 
 ; (insert-if-short x lst n) -> lst with x in front of every list shorter than n
-;   Recursive reading: each sublist is replaced by its own answer and atoms
-;   are kept; then x goes in front if the original lst has fewer than n elements.
+;   Recursive reading: that of make-inserter, where a length passes when it is
+;   less than n. So () becomes (x) whenever 0 < n.
 (define (insert-if-short x lst n)
-  (let ((inside (my-map (lambda (v) (if (list-value? v) (insert-if-short x v n) v))
-                        lst)))
-    (if (< (my-length lst) n)
-        (cons x inside)
-        inside)))
+  ((make-inserter x (lambda (len) (< len n))) lst))
 
 ; (print-insert-result) -> reads x, lst and n, prints the resulting list
 ;   Recursive reading: none of its own. let* fixes the order of the three reads.
