@@ -26,3 +26,15 @@ apply_op(/, X, Y, Z) :-
     Y =\= 0,
     X mod Y =:= 0,
     Z is X // Y.
+
+% expression(+Numbers, -Tree, ?Value)
+%   Declarative reading: Tree is an expression over exactly Numbers, in that
+%   order, in which every division is exact, and Value is its value.
+%   Base case: one number. Otherwise the top operator joins the expressions
+%   for the two parts of some split, each a shorter list.
+expression([N], num(N), N).
+expression(Numbers, node(Op, Left, Right), Value) :-
+    split(Numbers, Front, Back),
+    expression(Front, Left, X),
+    expression(Back, Right, Y),
+    apply_op(Op, X, Y, Value).
