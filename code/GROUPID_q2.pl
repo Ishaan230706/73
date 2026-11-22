@@ -12,3 +12,17 @@
 %   followed by Back. So both are strictly shorter than List.
 split(List, [F|Front], [B|Back]) :-
     append([F|Front], [B|Back], List).
+
+% apply_op(?Op, +X, +Y, ?Z)
+%   Declarative reading: Z is the integer X Op Y. A division exists only if
+%   Y is not zero and leaves no remainder.
+apply_op(+, X, Y, Z) :-
+    Z is X + Y.
+apply_op(-, X, Y, Z) :-
+    Z is X - Y.
+apply_op(*, X, Y, Z) :-
+    Z is X * Y.
+apply_op(/, X, Y, Z) :-
+    Y =\= 0,
+    X mod Y =:= 0,
+    Z is X // Y.
