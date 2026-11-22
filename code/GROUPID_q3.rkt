@@ -53,3 +53,12 @@
          seen
          (cons (car node)
                (visit (caddr node) (visit (cadr node) seen)))))))
+
+; (print-all-traversals tree) -> prints inorder, preorder and postorder, one per line
+;   Recursive reading: none of its own; the three traversals do the recursion.
+(define (print-all-traversals tree)
+  (print-inorder tree)
+  (display (preorder tree))
+  (newline)
+  (display (postorder tree))
+  (newline))
