@@ -103,3 +103,9 @@ generate_equation(List, Equation) :-
 all_equations(List, Equations) :-
     findall(Equation, equation(List, Equation), Found),
     sort(Found, Equations).
+
+% count_equations(+List, ?N)
+%   Declarative reading: List has exactly N different valid equations.
+count_equations(List, N) :-
+    all_equations(List, Equations),
+    length(Equations, N).
