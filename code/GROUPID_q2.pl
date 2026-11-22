@@ -90,3 +90,9 @@ equation(Numbers, Equation) :-
     expression_text(Right, RightText),
     atomics_to_string([LeftText, "=", RightText], Text),
     Equation = Text.            % unify afterwards, so a bound atom is not accepted
+
+% generate_equation(+List, ?Equation)
+%   Declarative reading: Equation is a valid equation of List. One is given,
+%   and there is no answer when List has none.
+generate_equation(List, Equation) :-
+    once(equation(List, Equation)).
