@@ -73,6 +73,13 @@ clue(7, Solution) :-
 clue(8, Solution) :-
     memberchk(p(_, research, Lang, data), Solution),
     Lang \== javascript.
+% Clue 9 repairs the puzzle. Two of the three solutions of clues 1-8 consist of
+% the same (Dept, Lang, Project) triples held by different friends, so a clue
+% without names is either true in both or false in both. The only solution that
+% such a clue can isolate is the third, in which AI goes with testing.
+% CLUE 9: The friend who prefers the AI project works in the testing department.
+clue(9, Solution) :-
+    memberchk(p(_, testing, _, 'AI'), Solution).
 
 % solution(+Active, -Solution)
 %   Declarative reading: Solution is a legal assignment in which there is no
