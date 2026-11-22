@@ -96,3 +96,10 @@ equation(Numbers, Equation) :-
 %   and there is no answer when List has none.
 generate_equation(List, Equation) :-
     once(equation(List, Equation)).
+
+% all_equations(+List, -Equations)
+%   Declarative reading: Equations is the set of all valid equations of List,
+%   as a list in standard order.
+all_equations(List, Equations) :-
+    findall(Equation, equation(List, Equation), Found),
+    sort(Found, Equations).
