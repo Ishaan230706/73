@@ -66,3 +66,15 @@ bracket(Side, ParentOp, Child, Text0, Text) :-
     ->  atomics_to_string(["(", Text0, ")"], Text)
     ;   Text = Text0
     ).
+
+% expression_text(+Tree, -Text)
+%   Declarative reading: Text is the canonical string of Tree: a number in
+%   decimal, or the two operand texts, bracketed as needed, around the operator.
+expression_text(num(N), Text) :-
+    atomics_to_string([N], Text).
+expression_text(node(Op, Left, Right), Text) :-
+    expression_text(Left, LeftText0),
+    expression_text(Right, RightText0),
+    bracket(left, Op, Left, LeftText0, LeftText),
+    bracket(right, Op, Right, RightText0, RightText),
+    atomics_to_string([LeftText, Op, RightText], Text).
