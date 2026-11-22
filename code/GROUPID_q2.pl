@@ -78,3 +78,15 @@ expression_text(node(Op, Left, Right), Text) :-
     bracket(left, Op, Left, LeftText0, LeftText),
     bracket(right, Op, Right, RightText0, RightText),
     atomics_to_string([LeftText, Op, RightText], Text).
+
+% equation(+Numbers, ?Equation)
+%   Declarative reading: Equation is the canonical string L=R for some split
+%   of Numbers and some expressions L and R over its parts with equal values.
+equation(Numbers, Equation) :-
+    split(Numbers, Front, Back),
+    expression(Front, Left, Value),
+    expression(Back, Right, Value),
+    expression_text(Left, LeftText),
+    expression_text(Right, RightText),
+    atomics_to_string([LeftText, "=", RightText], Text),
+    Equation = Text.            % unify afterwards, so a bound atom is not accepted
