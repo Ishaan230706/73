@@ -42,3 +42,14 @@
          seen
          (visit (caddr node)
                 (visit (cadr node) (cons (car node) seen)))))))
+
+; (postorder tree) -> the values in the order left subtree, right subtree, node
+;   Recursive reading: () adds nothing to what has been seen; a node adds all
+;   of its left subtree, then all of its right subtree, then its value.
+(define (postorder tree)
+  (my-reverse
+   (let visit ((node tree) (seen '()))
+     (if (null? node)
+         seen
+         (cons (car node)
+               (visit (caddr node) (visit (cadr node) seen)))))))
