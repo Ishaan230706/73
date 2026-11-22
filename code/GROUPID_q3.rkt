@@ -14,3 +14,14 @@
     (if (null? rest)
         reversed
         (loop (cdr rest) (cons (car rest) reversed)))))
+
+; (inorder tree) -> the values in the order left subtree, node, right subtree
+;   Recursive reading: () adds nothing to what has been seen; a node adds all
+;   of its left subtree, then its value, then all of its right subtree.
+(define (inorder tree)
+  (my-reverse
+   (let visit ((node tree) (seen '()))
+     (if (null? node)
+         seen
+         (visit (caddr node)
+                (cons (car node) (visit (cadr node) seen)))))))
