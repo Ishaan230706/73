@@ -76,7 +76,7 @@ clue(8, Solution) :-
 % Clue 9 repairs the puzzle. Two of the three solutions of clues 1-8 consist of
 % the same (Dept, Lang, Project) triples held by different friends, so a clue
 % without names is either true in both or false in both. The only solution that
-% such a clue can isolate is the remaining one (S2 in P1_REPORT.md), in which AI
+% such a clue can isolate is the remaining one (B in P1_REPORT.md), in which AI
 % goes with testing.
 % CLUE 9: The friend who prefers the AI project works in the testing department.
 clue(9, Solution) :-
