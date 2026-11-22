@@ -92,3 +92,10 @@ print_person(p(Name, Dept, Lang, Project)) :-
 main :-
     once(solution([1, 2, 3, 4, 5, 6, 7, 8], Solution)),
     forall(member(Person, Solution), print_person(Person)).
+
+% count_solutions(+Active, ?N)
+%   Declarative reading: exactly N legal assignments satisfy the clues numbered
+%   in Active, ignoring all other clues.
+count_solutions(Active, N) :-
+    findall(Solution, solution(Active, Solution), Solutions),
+    length(Solutions, N).
