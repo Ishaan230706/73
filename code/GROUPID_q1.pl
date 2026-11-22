@@ -20,3 +20,16 @@ assemble([], [], [], [], []).
 assemble([Name|Names], [Dept|Depts], [Lang|Langs], [Project|Projects],
          [p(Name, Dept, Lang, Project)|People]) :-
     assemble(Names, Depts, Langs, Projects, People).
+
+% candidate(-Solution)
+%   Declarative reading: Solution gives the four friends, in their fixed order,
+%   a different department, language and project each.
+candidate(Solution) :-
+    values(name, Names),
+    values(department, AllDepts),
+    values(language, AllLangs),
+    values(project, AllProjects),
+    permutation(AllDepts, Depts),
+    permutation(AllLangs, Langs),
+    permutation(AllProjects, Projects),
+    assemble(Names, Depts, Langs, Projects, Solution).
