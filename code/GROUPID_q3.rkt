@@ -1,0 +1,16 @@
+#lang racket/base
+; S1: Binary Tree Traversals.
+;
+; A tree is () or (value left right), so for a non-empty node the value is
+; (car node), the left subtree (cadr node) and the right subtree (caddr node).
+; The traversals visit left before right, cons each value onto an accumulator
+; as it is reached, and reverse once at the end, which keeps them linear.
+
+; (my-reverse lst) -> the top-level elements of lst in reverse order
+;   Recursive reading: when nothing is left, the answer is what was reversed
+;   so far; otherwise move the first element onto the front of that.
+(define (my-reverse lst)
+  (let loop ((rest lst) (reversed '()))
+    (if (null? rest)
+        reversed
+        (loop (cdr rest) (cons (car rest) reversed)))))
