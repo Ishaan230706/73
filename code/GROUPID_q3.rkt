@@ -62,3 +62,12 @@
   (newline)
   (display (postorder tree))
   (newline))
+
+; (tree-height tree) -> the height of tree
+;   Recursive reading: () has height 0; a node has 1 plus the larger of the
+;   heights of its two subtrees.
+(define (tree-height tree)
+  (if (null? tree)
+      0
+      (+ 1 (max (tree-height (cadr tree))
+                (tree-height (caddr tree))))))
