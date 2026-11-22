@@ -13,3 +13,11 @@
     (if (null? rest)
         count
         (loop (cdr rest) (+ count 1)))))
+
+; (my-map f lst) -> the list of (f e) for each top-level element e, in order
+;   Recursive reading: () maps to (); otherwise (f first) goes on the front of
+;   the mapping of the rest.
+(define (my-map f lst)
+  (if (null? lst)
+      '()
+      (cons (f (car lst)) (my-map f (cdr lst)))))
