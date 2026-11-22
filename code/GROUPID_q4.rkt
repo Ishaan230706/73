@@ -27,3 +27,13 @@
 ;   dotted pairs in the input. pair? alone would miss ().
 (define (list-value? v)
   (or (null? v) (pair? v)))
+
+; (insert-if-short x lst n) -> lst with x in front of every list shorter than n
+;   Recursive reading: each sublist is replaced by its own answer and atoms
+;   are kept; then x goes in front if the original lst has fewer than n elements.
+(define (insert-if-short x lst n)
+  (let ((inside (my-map (lambda (v) (if (list-value? v) (insert-if-short x v n) v))
+                        lst)))
+    (if (< (my-length lst) n)
+        (cons x inside)
+        inside)))
