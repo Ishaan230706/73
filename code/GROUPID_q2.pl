@@ -57,3 +57,12 @@ needs_parentheses(right, ParentOp, node(ChildOp, _, _)) :-
     precedence(ParentOp, Parent),
     precedence(ChildOp, Child),
     Child =< Parent.
+
+% bracket(+Side, +ParentOp, +Child, +Text0, -Text)
+%   Declarative reading: Text is Text0, the text of Child, with parentheses
+%   around it exactly when Child needs them as that operand of ParentOp.
+bracket(Side, ParentOp, Child, Text0, Text) :-
+    (   needs_parentheses(Side, ParentOp, Child)
+    ->  atomics_to_string(["(", Text0, ")"], Text)
+    ;   Text = Text0
+    ).
