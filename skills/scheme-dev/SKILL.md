@@ -49,7 +49,8 @@ If one is needed, write a helper with a `my-` prefix from the allowed forms.
 
 ### Comments and readings
 
-Every function has a header of this shape:
+Every function in a solution file has a header of this shape. In a test file a short comment,
+which may cover a group of related helpers, is enough.
 
 ```scheme
 ; (my-length lst) -> number of top-level elements of lst
