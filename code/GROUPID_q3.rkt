@@ -87,3 +87,9 @@
     (cond ((null? node) count)
           ((leaf? node) (+ count 1))
           (else (visit (caddr node) (visit (cadr node) count))))))
+
+; (print-height-and-leaves tree) -> prints the list (height leaf-count) on one line
+;   Recursive reading: none of its own; tree-height and count-leaves do the recursion.
+(define (print-height-and-leaves tree)
+  (display (list (tree-height tree) (count-leaves tree)))
+  (newline))
