@@ -37,3 +37,12 @@
     (if (< (my-length lst) n)
         (cons x inside)
         inside)))
+
+; (print-insert-result) -> reads x, lst and n, prints the resulting list
+;   Recursive reading: none of its own. let* fixes the order of the three reads.
+(define (print-insert-result)
+  (let* ((x (read))
+         (lst (read))
+         (n (read)))
+    (display (insert-if-short x lst n))
+    (newline)))
