@@ -45,3 +45,15 @@ precedence(+, 1).
 precedence(-, 1).
 precedence(*, 2).
 precedence(/, 2).
+
+% needs_parentheses(+Side, +ParentOp, +Child)
+%   Declarative reading: Child, as the Side operand of ParentOp, is printed in
+%   parentheses. No clause matches num(_), so a number never is.
+needs_parentheses(left, ParentOp, node(ChildOp, _, _)) :-
+    precedence(ParentOp, Parent),
+    precedence(ChildOp, Child),
+    Child < Parent.
+needs_parentheses(right, ParentOp, node(ChildOp, _, _)) :-
+    precedence(ParentOp, Parent),
+    precedence(ChildOp, Child),
+    Child =< Parent.
