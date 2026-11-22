@@ -73,3 +73,10 @@ clue(7, Solution) :-
 clue(8, Solution) :-
     memberchk(p(_, research, Lang, data), Solution),
     Lang \== javascript.
+
+% solution(+Active, -Solution)
+%   Declarative reading: Solution is a legal assignment in which there is no
+%   clue numbered in Active that does not hold. Other clues play no part.
+solution(Active, Solution) :-
+    candidate(Solution),
+    forall(member(N, Active), clue(N, Solution)).
