@@ -12,3 +12,11 @@ values(name,       ['Alex', 'Ben', 'Carla', 'Dana']).
 values(department, [research, development, design, testing]).
 values(language,   [python, java, 'c++', javascript]).
 values(project,    ['AI', web, embedded, data]).
+
+% assemble(+Names, +Depts, +Langs, +Projects, -Solution)
+%   Declarative reading: the i-th term of Solution is p/4 of the i-th elements
+%   of Names, Depts, Langs and Projects, which all have the same length.
+assemble([], [], [], [], []).
+assemble([Name|Names], [Dept|Depts], [Lang|Langs], [Project|Projects],
+         [p(Name, Dept, Lang, Project)|People]) :-
+    assemble(Names, Depts, Langs, Projects, People).
