@@ -25,3 +25,9 @@
          seen
          (visit (caddr node)
                 (cons (car node) (visit (cadr node) seen)))))))
+
+; (print-inorder tree) -> prints the inorder list on one line
+;   Recursive reading: none of its own; inorder does the recursion.
+(define (print-inorder tree)
+  (display (inorder tree))
+  (newline))
