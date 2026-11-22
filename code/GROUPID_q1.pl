@@ -86,3 +86,9 @@ solution(Active, Solution) :-
 %   writes that term as the line "Name = [Dept, Lang, Project]".
 print_person(p(Name, Dept, Lang, Project)) :-
     format("~w = [~w, ~w, ~w]~n", [Name, Dept, Lang, Project]).
+
+% main
+%   Declarative reading: clues 1 to 8 have a solution. The first one found is printed.
+main :-
+    once(solution([1, 2, 3, 4, 5, 6, 7, 8], Solution)),
+    forall(member(Person, Solution), print_person(Person)).
