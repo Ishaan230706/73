@@ -21,3 +21,9 @@
   (if (null? lst)
       '()
       (cons (f (car lst)) (my-map f (cdr lst)))))
+
+; (list-value? v) -> true when v is a list rather than an atom
+;   Recursive reading: none. v is a list if it is () or a pair, as there are no
+;   dotted pairs in the input. pair? alone would miss ().
+(define (list-value? v)
+  (or (null? v) (pair? v)))
