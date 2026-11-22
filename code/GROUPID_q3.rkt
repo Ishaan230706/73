@@ -78,3 +78,12 @@
   (and (pair? node)
        (null? (cadr node))
        (null? (caddr node))))
+
+; (count-leaves tree) -> the number of leaves of tree
+;   Recursive reading: () adds no leaf to the count so far; a leaf adds one;
+;   any other node adds the leaves of its left and then of its right subtree.
+(define (count-leaves tree)
+  (let visit ((node tree) (count 0))
+    (cond ((null? node) count)
+          ((leaf? node) (+ count 1))
+          (else (visit (caddr node) (visit (cadr node) count))))))
