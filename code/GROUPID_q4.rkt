@@ -28,6 +28,21 @@
 (define (list-value? v)
   (or (null? v) (pair? v)))
 
+; (make-inserter x len-ok?) -> a function from a list to that list with x in
+;                              front of every list whose length passes len-ok?
+;   Recursive reading: the function returned replaces each sublist by its own
+;   answer and keeps atoms; then it puts x in front if len-ok? holds of the
+;   length of the original list.
+(define (make-inserter x len-ok?)
+  (letrec ((insert
+            (lambda (lst)
+              (let ((inside (my-map (lambda (v) (if (list-value? v) (insert v) v))
+                                    lst)))
+                (if (len-ok? (my-length lst))
+                    (cons x inside)
+                    inside)))))
+    insert))
+
 ; (insert-if-short x lst n) -> lst with x in front of every list shorter than n
 ;   Recursive reading: each sublist is replaced by its own answer and atoms
 ;   are kept; then x goes in front if the original lst has fewer than n elements.
