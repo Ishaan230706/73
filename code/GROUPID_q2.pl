@@ -38,3 +38,10 @@ expression(Numbers, node(Op, Left, Right), Value) :-
     expression(Front, Left, X),
     expression(Back, Right, Y),
     apply_op(Op, X, Y, Value).
+
+% precedence(?Op, ?Level)
+%   Declarative reading: Op binds at Level. A higher level binds tighter.
+precedence(+, 1).
+precedence(-, 1).
+precedence(*, 2).
+precedence(/, 2).
