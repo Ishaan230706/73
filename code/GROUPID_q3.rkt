@@ -71,3 +71,10 @@
       0
       (+ 1 (max (tree-height (cadr tree))
                 (tree-height (caddr tree))))))
+
+; (leaf? node) -> true when node is a node with two empty subtrees
+;   Recursive reading: none, it looks one level down. () is not a leaf.
+(define (leaf? node)
+  (and (pair? node)
+       (null? (cadr node))
+       (null? (caddr node))))
